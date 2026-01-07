@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.memo.camerameasure">
+
+    <!-- Required Permissions -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-feature android:name="android.hardware.camera" android:required="true"/>
+
+    <!-- 🔹 Add Storage Permissions for Android 9 and below -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="Camera Measure"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity android:name="com.example.memo.camerameasure.ImageAccess"
+            android:screenOrientation="portrait"
+            android:exported="true"/>
+
+        <activity android:name="com.example.memo.camerameasure.Online"
+            android:screenOrientation="portrait"
+            android:exported="true"/>
+
+        <activity android:name="com.example.memo.camerameasure.main_menu"
+            android:screenOrientation="portrait"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.example.memo.camerameasure.Offline"
+            android:screenOrientation="landscape"
+            android:exported="true"/>
+
+        <!-- 🔹 FileProvider for Camera Access -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.memo.camerameasure.fileprovider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
+
+        <!-- Google Play Services Metadata -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
+    </application>
+</manifest>
